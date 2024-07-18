@@ -2,10 +2,10 @@
     <!-- <form method="get" action="/listings/new">
         <button type="submit">Add new </button>
     </form> -->
-    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 justify-content-center">
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 justify-content-center">
         <% for(list of AllList){ %>
             <a href="/listings/<%= list._id %>" class="listings-link">
-            <div class="card col" >
+            <div class="card col listing-card" >
                 <img src="<%= list.image %>" class="card-img-top" alt="image not supported" style="height: 18rem;">
                 <div class="card-img-overlay">Am!t</div>
                 <div class="card-body">

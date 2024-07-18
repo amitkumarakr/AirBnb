@@ -4,7 +4,7 @@
         <div class="col-8 offset-3">
         <h3><b><%= listing.title %></b></h3>
         </div>
-    <div class="card col-6 offset-3">
+    <div class="card col-6 offset-3 listing-card">
         <img src=<%= listing.image %> class="card-img-top show-img" alt="Listing image">
         <div class="card-body">
           <p class="card-text">
@@ -26,22 +26,48 @@
    
     <div class="col-8 offset-3 mb-3 mt-3">
         <hr/>
-            <form>
+            <form method="post" action="/listings/<%= listing._id %>/reviews" class="needs-validation" novalidate>
                 <div class="mb-2">
                     <label for="rating" class="form-label">Rate This Listing (1-5):</label><br/>
-                    <input type="range" id="rating" name="rating" min="1" max="5" class="form-control">
+                    <input type="range" id="rating" name="review[rating]" min="1" max="5" class="form-control">
                 </div>
                 <div class="mb-2">
                     <label for="comments" class="form-label">Add a comment:</label>
-                    <textarea id="comments" name="comments" rows="4" cols="50" class="form-control"></textarea>
+                    <textarea id="comments" name="review[comment]" rows="4" cols="50" class="form-control" required></textarea> 
+                    <!-- here the name comment show to same as the name written in the review schema -->
+                     <div class="invalid-feedback">
+                        Add some comments
                 </div>
+                </div>
+                
                 <div>
                     <button class="btn btn-outline-dark">
                         Submit
                     </button>
                 </div>
             </form>
+            <hr />
+    <h5>All Reviews</h5>
+    <div class="row">
+      <% for(review of listing.reviews) { %>
+      <div class="card col-4 m-1 p-1">
+        <div class="card-body">
+          <h5 style="padding: 1px; margin-bottom: 1px; font-size: medium;">Daniel</h5>
+          <p style="margin-bottom: 2px; font-size: small;"><%= review.comment %></p>
+          <div style="margin-bottom: 5px;">
+            <% for(let i = 0; i < review.rating; i++) { %>
+              <span style="margin-top: 2px; font-size: small;">⭐</span>
+            <% } %>
+          </div>
+          <div>
+            <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review.id %>?_method=Delete">
+              <button class="btn btn-sm btn-outline-dark ">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <%} %>
+    </div>
     </div>
 </div>
-
 </body>
