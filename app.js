@@ -12,15 +12,19 @@ const Review = require("./models/review.js");
 const review = require("./models/review.js");
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
-main()
-  .then(() => {
-    console.log("Connected to MDB");
-  })
-  .catch((err) => console.log(err));
-
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MDB");
+  } catch (err) {
+    console.error("Error connecting to MongoDB:", err);
+  }
 }
+
+main();
 app.engine("ejs", ejsMate);
 app.use(methodOverride("_method"));
 // app.set("view engine", "views");

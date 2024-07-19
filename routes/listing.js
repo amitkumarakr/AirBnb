@@ -17,7 +17,7 @@ const ValidateListing = (req, res, next) => {
   }
   
 router.get("/", wrapAsync(async (req, res) => {
-    const AllList = await Listing.find({}).limit(50).exec();;
+    const AllList = await Listing.find({}).limit(50).lean().exec();;
     res.render("./listings/index.ejs", { AllList });
   }));
   router.get("/new", (req, res) => {
