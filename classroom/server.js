@@ -4,20 +4,37 @@ const users = require("./routes/user.js");
 const posts = require("./routes/post.js");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-
+app.set("view engine", "ejs");
+const path = require("path");
+app.set("views", path.join(__dirname, "views"));
+const flash = require("connect-flash");
 // Home
+
 
 const sessionOptions = {
         secret: "IamAmitkumar",
         resave: false,
         saveUninitialized: true,
 };
-app.use(session(sessionOptions));// it will work/run for the every route
+app.use(session(sessionOptions));// it will work/run for the every route and create s.id (session id);
+app.use(flash());
 app.get("/register" ,(req, res) =>{
-    let {name} = req.query;
+    let {name = "anonymous"} = req.query;
     req.session.name = name;
-    console.log(name);
-    res.send(name);
+    if(name === "anonymous"){
+        req.flash("error","user not registered");
+    }
+    else{
+        req.flash("success","user registered");
+    }
+    // req.flash("Success","User registered Successfully");
+    res.redirect("/hello");
+})
+app.get("/hello",(req,res) =>{
+    // console.log(req.flash("Success"));
+    res.locals.success = req.flash("Success");
+    res.locals.error = req.flash("error");
+    res.render("page.ejs",{name : req.session.name});
 })
 // // "/"
 // app.use(cookieParser("secretcode"));

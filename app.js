@@ -12,9 +12,19 @@ const Review = require("./models/review.js");
 const review = require("./models/review.js");
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
+const dotenv = require("dotenv");
+const session = require("express-session");
+dotenv.config();
+const sessionOptions = {
+  secret: "your_secret_key",
+  resave: false,
+  saveUninitialized: true,
+
+}
+app.use(session(sessionOptions));
 async function main() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust", {
+    await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
