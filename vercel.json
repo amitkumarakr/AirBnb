@@ -21,7 +21,7 @@
     }
   ],
   "env": {
-    "MONGO_URL": "@your_mongo_url"
+    "MONGO_URL": "mongodb+srv://akamitkumar99100:eEzdQvYec8YWtc4@cluster0.hyynrjw.mongodb.net/air-bnb"
   }
 }
 
