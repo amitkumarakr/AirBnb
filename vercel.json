@@ -1,21 +1,28 @@
 {
-    "version": 2,
-    "functions": {
-    "api/your-function.js": {
-      "maxDuration": 30
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "views/**/*",
+      "use": "@vercel/static"
     }
-  },
-    "builds": [
-      {
-        "src": "app.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/app.js"
-      }
-    ]
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/app.js"
+    }
+  ],
+  "env": {
+    "MONGO_URL": "@your_mongo_url"
   }
+}
+
   
