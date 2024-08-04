@@ -1,12 +1,71 @@
-<% layout('layouts/boilerplate') %>
+<% layout('layouts/boilerplate') %> <%= success %>
     <!-- <form method="get" action="/listings/new">
         <button type="submit">Add new </button>
     </form> -->
+    <!-- <style>
+        #filters {
+            display: flex;
+            flex-direction: row; /* Arrange filters in rows */
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+        .filter {
+            text-align: center;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        .filter:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    </style>
+    
+    <div id="filters">
+        <div class="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-snowflake"></i></div>
+            <p>Snow</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-umbrella-beach"></i></div>
+            <p>Summer</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-tree"></i></div>
+            <p>Forest</p>
+        </div>
+    </div> -->
+    
+
+
     <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 justify-content-center">
         <% for(list of AllList){ %>
             <a href="/listings/<%= list._id %>" class="listings-link">
             <div class="card col listing-card" >
-                <img src="<%= list.image %>" class="card-img-top" alt="image not supported" style="height: 18rem;">
+                <img src="<%= list.image.url %>" class="card-img-top" alt="image not supported" style="height: 18rem;">
                 <div class="card-img-overlay">Am!t</div>
                 <div class="card-body">
                   <p class="card-text">

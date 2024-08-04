@@ -10,22 +10,33 @@ const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema, reviewSchema} = require("./Schema.js");
 const Review = require("./models/review.js");
 const review = require("./models/review.js");
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const ListingsRouter = require("./routes/listing.js");
+const ReviewsRouter = require("./routes/review.js");
+const userRouter  = require("./routes/user.js");
+
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
+
 const dotenv = require("dotenv");
 const session = require("express-session");
+const flash = require("connect-flash");
 dotenv.config();
 const sessionOptions = {
   secret: "your_secret_key",
   resave: false,
   saveUninitialized: true,
-
+  cookie:{
+    expires: Date.now() + 7*24*60*60*1000,
+    maxAge: 7*24*60*60*1000,
+    httpOnly: true
+  }
 }
-app.use(session(sessionOptions));
+
 async function main() {
   try {
     await mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
+      // useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     console.log("Connected to MDB");
@@ -44,6 +55,39 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+
+
+app.use(session(sessionOptions));
+app.use(flash());
+// passport should be declared after the session
+// authenticate part
+app.use(passport.initialize());
+app.use(passport.session());  //middleware
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+app.use((req, res,next) =>{
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  res.locals.currUser = req.user;
+
+  next();
+})
+// app.get("/", (req, res) => {
+//   res.render("./listings/home.ejs");
+// });
+app.get("/demouser",async (req,res) =>{
+    let fakeUser = new User({
+      email: "student@gmail.com",
+      username:"lunetic_student"
+    });
+  let registerdUser =  await User.register(fakeUser,"hello123") // register -> static method AND  pbkdf2 hashing is used
+  res.send(registerdUser);
+})
 // app.set('views', path.join(__dirname, 'views'));
 // app.set("view engine", "ejs");
 
@@ -82,13 +126,12 @@ const valideReview = (req, res, next) =>{
   }
   next();
 }
-app.get("/", (req, res) => {
-  res.render("./listings/home.ejs");
-});
 
-app.use("/listings",listings); // all listings
 
-app.use("/listings/:id/reviews",reviews);   // all reviews
+app.use("/listings",ListingsRouter); // all listings
+
+app.use("/listings/:id/reviews",ReviewsRouter);   // all reviews
+app.use("/",userRouter);
 
 // review
 // Method Review post

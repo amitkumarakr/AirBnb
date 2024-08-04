@@ -1,0 +1,110 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  h3 {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+</style>
+
+<div class="row ">
+  <div class="col-6 offset-3">
+    <form method="post" action="/signup">
+      <div class="mb-2">
+        <label for="username" class="form-label" class="needs-validation" novalidate>Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <br />
+
+      <div class="mb-2">
+        <label for="email" class="form-label" >Email</label>
+        <input
+          type="text"
+          class="form-control"
+          name="email"
+          id="email"
+          required
+        />
+      </div>
+
+      <br>
+
+
+      <div class="mb-2">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          required
+        />
+      </div>
+      <button class="btn btn-success mb-2">SignUp</button>
+    </form>
+  </div>
+</div>

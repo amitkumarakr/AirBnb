@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp Page</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background: linear-gradient(135deg, #1c1c1c, #333);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #c9d1d9;
+        }
+
+        .container {
+            background-color: #161b22;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h3 {
+            margin-bottom: 1rem;
+            color: #c9d1d9;
+        }
+
+        .form-label {
+            color: #c9d1d9;
+        }
+
+        .form-control {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            background-color: #0d1117;
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 0.2rem rgba(88, 166, 255, 0.25);
+            outline: none;
+        }
+
+        .btn-success {
+            background-color: #238636;
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-success:hover {
+            background-color: #2ea043;
+        }
+
+        .mb-2 {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Login</h3>
+        <form method="post" action="/login">
+            <div class="mb-2">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="username" required />
+            </div>
+            <div class="mb-2">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" required />
+            </div>
+            <button class="btn btn-success mb-2">Login</button>
+        </form>
+    </div>
+</body>
+</html>

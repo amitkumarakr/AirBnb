@@ -20,7 +20,7 @@ app.use(session(sessionOptions));// it will work/run for the every route and cre
 app.use(flash());
 app.get("/register" ,(req, res) =>{
     let {name = "anonymous"} = req.query;
-    req.session.name = name;
+    req.session.name = name;    // here we can define our own property
     if(name === "anonymous"){
         req.flash("error","user not registered");
     }

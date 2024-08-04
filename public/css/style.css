@@ -10,7 +10,7 @@ body{
 }
  .navbar{
     height: 5rem;
-    background-color: white;
+    background-color: rgb(244, 236, 236);
  }
 .fa-compass{
     color: #fe424d;
@@ -51,7 +51,7 @@ body{
 
 .listing-card{
     border: none !important;
-    margin-bottom: 2rem;
+    margin-bottom:2rem;
 }
 .card-img-top{
     border-radius: 1rem !important;
@@ -110,3 +110,4 @@ body{
     border-top: 1px solid #ccc; /* Adjust color and style as needed */
     z-index: 1; /* Ensure the hr appears above other content */
 }
+
